@@ -1,0 +1,263 @@
+nav {
+  background-color: #e77753;
+  height: 60px;
+}
+
+nav .logo {
+  font-family: 'Lobster', cursive;
+  font-size: 40px;
+  color: #435b66;
+  margin-left: 20px;
+  text-shadow: 5px 15px rgba(0, 0, 0, 0.6);
+  transform: translatey(0px);
+  animation: float 6s ease-in-out infinite;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+@keyframes float {
+  0% {
+    text-shadow: 5px 15px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
+  50% {
+    text-shadow: 25px 15px rgba(0, 0, 0, 0.2);
+    transform: translatey(-20px);
+  }
+  100% {
+    text-shadow: 5px 15px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
+}
+
+main {
+  padding-right: 150px;
+  padding-left: 150px;
+}
+
+input[type=checkbox] {
+  -webkit-transform: scale(1.8);
+}
+
+input:hover[type=checkbox] {
+  cursor: pointer;
+}
+
+body {
+  background-color: #88a7af;
+}
+
+img {
+  width: 300px;
+}
+
+.votebox {
+  width: 60px;
+}
+
+body h1 {
+  font-size: 50px;
+  color: #e3a94b;
+  text-align: center;
+  margin-top: 0;
+}
+
+input.name {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e3a94b;
+  padding: 2px 5px;
+  margin: 15px;
+}
+
+input.email {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e3a94b;
+  padding: 2px 5px;
+  margin: 15px;
+}
+
+.event-background {
+  background-color: #181027;
+  color: white;
+  margin-top: 40px;
+  padding: 40px;
+  border-radius: 6px;
+}
+
+.div-class {
+  height: 50px;
+  width: 100px;
+  background-color: black;
+}
+
+/* rowspan, colspan html attributes if you need them */
+/*.event-table {
+  margin-left: auto;
+  margin-right: auto;
+  background: rgb(34,193,195);
+  background: radial-gradient(circle, rgba(34,193,195,1) 0%, rgba(148,187,233,1) 100%);
+  opacity: 80%;
+
+  td, th {
+    border: 1px solid grey;
+    width: 60px;
+    padding: 15px;
+    height: 40px;
+  }
+  td:first-child, th:first-child {
+    border-radius: 5px;
+    width: auto;
+  }
+  th {
+    color: white;
+    width: 50px;
+}
+border: 1px solid black;
+border-radius: 5px;
+}*/
+.event-table {
+  margin-left: auto;
+  margin-right: auto;
+  background: #22c1c3;
+  background: radial-gradient(circle, #22c1c3 0%, #94bbe9 100%);
+  opacity: 80%;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.event-table td, .event-table tr, .event-table th {
+  border: 1px solid grey;
+  /*width: 60px;*/
+  height: 40px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.event-table tr td:first-child {
+  width: 80px;
+}
+
+.user {
+  text-align: center;
+}
+
+.new-part {
+  text-align: center;
+}
+
+.icon {
+  opacity: 0;
+}
+
+.new-part:hover .fa-user-plus {
+  opacity: 1;
+}
+
+.user:hover .icon {
+  opacity: 1;
+}
+
+.button {
+  font-size: 1.2em;
+  margin-left: 570px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+td:hover {
+  background-color: lightblue;
+}
+
+.event-table:hover {
+  cursor: pointer;
+}
+
+body p {
+  text-align: center;
+}
+
+.submit {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #7b38d8;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 25px;
+  padding: 20px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.submit span.submitting {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.submit span.submitting:after {
+  content: '\00bb';
+  /* CSS Entities. To use HTML Entities, use &#8594;*/
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.submit:hover span.submitting {
+  padding-right: 25px;
+}
+
+.submit:hover span.submitting:after {
+  opacity: 1;
+  right: 0;
+}
+
+.update {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #26A683;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 25px;
+  padding: 20px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.update span.updating {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.update span.updating:after {
+  content: '\00bb';
+  /* CSS Entities. To use HTML Entities, use &#8594;*/
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.update:hover span.updating {
+  padding-right: 25px;
+}
+
+.update:hover span.updating:after {
+  opacity: 1;
+  right: 0;
+}
