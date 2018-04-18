@@ -5,10 +5,10 @@ class MessageList extends Component {
   render() {
     console.log("Rendering <MessageList/>");
 
-    const messages = this.props.messages;
-    console.log(messages);
+    const messages = this.props.messages
+
     const listItems = messages.map((message) =>
-    <Message key = {message.id} message={message}/>
+    <Message key = {message.id} username={message.username} content={message.content} message={message}/>
     );
 
     return(
