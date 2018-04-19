@@ -4,72 +4,51 @@ import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 import Message from './Message.jsx';
 
-var exampleSocket = new WebSocket("ws://localhost:3001", "protocolOne");
-
 class App extends Component {
 
   constructor(props) {
     super(props);
 
-
     this.state = {
-      currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [
-        {
-            id: 1,
-            type: "incomingMessage",
-            content: "I won't be impressed with technology until I can download food.",
-            username: "Anonymous1"
-        },
-        {
-            id: 2,
-            type: "incomingNotification",
-            content: "Anonymous1 changed their name to nomnom",
-        },
-        {
-            id: 3,
-            type: "incomingMessage",
-            content: "I wouldn't want to download Kraft Dinner. I'd be scared of cheese packet loss.",
-            username: "Anonymous2"
-        },
-        {
-            id: 4,
-            type: "incomingMessage",
-            content: "I'd love to download a fried egg, but I'm afraid encryption would scramble it",
-            username: "Anonymous2"
-        },
-        {
-            id: 5,
-            type: "incomingMessage",
-            content: "This isn't funny. You're not funny",
-            username: "nomnom"
-        }
-      ]
+      currentUser: {name: ""}, // optional. if currentUser is not defined, it means the user is Anonymous
+      messages: []
     };
-    this.onTest=this.onTest.bind(this);
+    this.sendMessage=this.sendMessage.bind(this);
+    this.sendUsername=this.sendUsername.bind(this);
   }
 
 
   componentDidMount() {
 
-    exampleSocket.onmessage = function (event) {
-      console.log(event);
-}
+      this.socket = new WebSocket('ws://localhost:3001');
+      this.socket.addEventListener('message', event => {
+        console.log('message', event);
+        const newMessage = JSON.parse(event.data);
+        if(newMessage.messageType === 'chat message') {
+          this.setState({
+            messages: this.state.messages.concat(newMessage),
+          });
+        }
+      });
+    }
+
+
+  sendUsername(username) {
+    this.state.currentUser.name = username;
+    console.log(username);
+    //this.socket.send(username);
+    console.log(username);
   }
 
 
-  onTest(content){
-    console.log("Hey we are in App.jsx ", content, this)
+  sendMessage(content){
 
     const newMessage = {
-      id: this.state.messages.length + 1,
-      content: content,
-      username: this.state.currentUser.name
+      username: this.state.currentUser.name,
+      content: content
     }
-
-    const messages = this.state.messages.concat(newMessage)
-
-    this.setState({messages: messages})
+    this.socket.send(JSON.stringify(newMessage));
+    console.log(newMessage)
   }
 
 
@@ -81,8 +60,9 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <ChatBar
-          user={this.state.currentUser}
-          onTest={this.onTest}
+          user={this.state.currentUser.name}
+          sendMessage={this.sendMessage}
+          sendUsername={this.sendUsername}
         />
         <MessageList messages={this.state.messages}/>
 
