@@ -6,12 +6,12 @@ Implements React and WebSocket technologies.
  
 ### Features:
 
--Users able to dynamically post messages via http://localhost:3000
--Users able to update their usernames and inform others of changes
--Dynamic notifications for when a user changes their username
--Dynamic user count that reflects the number of users connecting
- and disconnecting to the server.
--Styling completed in CSS. 
+-Users able to dynamically post messages via http://localhost:3000 \
+-Users able to update their usernames and inform others of changes \
+-Dynamic notifications for when a user changes their username \
+-Dynamic user count that reflects the number of users connecting \
+ and disconnecting to the server \
+-Styling completed in CSS
 
 
 ### To Run:
