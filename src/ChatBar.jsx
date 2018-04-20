@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+
+// Defining ChatBar class
+
 class ChatBar extends Component {
 
   constructor(props) {
@@ -10,6 +13,10 @@ class ChatBar extends Component {
     this._handleUsernameKeyPress = this._handleUsernameKeyPress.bind(this);
   }
 
+
+
+// Keypress behaviour for sending message
+
   _handleMessageKeyPress = (event) => {
     if (event.key === 'Enter') {
       this.props.sendMessage(event.target.value);
@@ -17,8 +24,10 @@ class ChatBar extends Component {
     }
   }
 
-  _handleUsernameKeyPress = (event) => {
 
+// Keypress behaviour for changing user
+
+  _handleUsernameKeyPress = (event) => {
   this.previousName = this.props.user;
 
     if (event.key === 'Enter') {
@@ -29,6 +38,9 @@ class ChatBar extends Component {
     }
 
   }
+
+
+  // Render function
 
   render() {
     console.log("Rendering <ChatBar/>");

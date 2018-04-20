@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+
+// Creating class for notifications of username changes
+
 class Notification extends Component {
   render() {
 

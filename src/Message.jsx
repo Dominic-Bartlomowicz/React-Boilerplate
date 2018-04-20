@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+
+// Creating class for messages
+
 class Message extends Component {
   render() {
 

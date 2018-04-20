@@ -1,6 +1,11 @@
+// Importing dependencies
+
 import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
+
+
+// Main class with constructor, super() syntax, and binding
 
 class App extends Component {
 
@@ -19,6 +24,8 @@ class App extends Component {
     this.updateUsername=this.updateUsername.bind(this);
   }
 
+
+// Receives components from server
 
   componentDidMount() {
       this.socket = new WebSocket('ws://localhost:3001');
@@ -46,15 +53,18 @@ class App extends Component {
             users: numUsers.content
           });
         }
-
       });
     }
 
+
+// Receives username from Chatbar.jsx
 
   sendUsername(username) {
     this.state.currentUser.name = username;
   }
 
+
+// Receives message from Chatbar.jsx and sends to server.js
 
   sendMessage(content){
 
@@ -68,6 +78,8 @@ class App extends Component {
   }
 
 
+// Receives new usernames from Chatbar.jsx and sends to server.js
+
   updateUsername(content) {
 
     this.setState({
@@ -79,6 +91,9 @@ class App extends Component {
     this.socket.send(JSON.stringify(content));
   }
 
+
+// Receives notification that the current user changes their name from Chatbar.jsx and sends to server.js
+
   sendNotification(content){
 
     const newNotification = {
@@ -89,6 +104,8 @@ class App extends Component {
     console.log(newNotification)
   }
 
+
+// Main render function
 
   render() {
     console.log("Rendering <App/>");
