@@ -33,24 +33,46 @@ wss.broadcast = function broadcast(message) {
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
-  ws.on('message', function incoming(message) {
-     console.log('received: %s', message);
-     console.log(message);
+  // Set up a callback for when a client closes the socket. This usually means they closed their browser.
+  ws.on('close', () => console.log('Client disconnected'));
 
+  ws.on('message', function incoming(message) {
+
+     console.log('received message: %s', message);
+     console.log(message);
      var messageObj = JSON.parse(message);
 
-     var obj = {
-       id: uuidv1(),
-       username: messageObj.username,
-       content: messageObj.content,
-       messageType: 'chat message'
-     }
+     console.log(messageObj.type);
 
-     var string = JSON.stringify(obj);
+     if (messageObj.type === "incomingMessage"){
 
-     wss.broadcast(string);
-
-     // Set up a callback for when a client closes the socket. This usually means they closed their browser.
-     ws.on('close', () => console.log('Client disconnected'));
+      var obj = {
+        id: uuidv1(),
+        username: messageObj.username,
+        content: messageObj.content,
+        type: "postMessage"
+      }
+      var string = JSON.stringify(obj);
+      wss.broadcast(string);
+    }
    });
+
+   ws.on('message', function incoming(notification) {
+
+      console.log('received notification: %s', notification);
+      console.log(notification);
+      var notifObj = JSON.parse(notification);
+
+      if (notifObj.type === "incomingNotification"){
+
+      var obj = {
+        id: uuidv1(),
+        content: notifObj.content,
+        type: "postNotification"
+        }
+
+        var string = JSON.stringify(obj);
+        wss.broadcast(string);
+      }
+    });
   });
