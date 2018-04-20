@@ -48,7 +48,6 @@ class App extends Component {
 
         const numUsers = JSON.parse(event.data);
         if(numUsers.type === "updateUsers") {
-          console.log("hello"+this.state.users)
           this.setState({
             users: numUsers.content
           });
@@ -74,7 +73,6 @@ class App extends Component {
       type: "incomingMessage"
     }
     this.socket.send(JSON.stringify(newMessage));
-    console.log(newMessage)
   }
 
 
@@ -85,8 +83,6 @@ class App extends Component {
     this.setState({
       currentUser: {name: content},
     });
-
-    console.log("The content is"+this.state.currentUser.name);
 
     this.socket.send(JSON.stringify(content));
   }
@@ -101,7 +97,6 @@ class App extends Component {
       type: "incomingNotification"
     }
     this.socket.send(JSON.stringify(newNotification));
-    console.log(newNotification)
   }
 
 

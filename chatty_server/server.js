@@ -27,7 +27,7 @@ wss.broadcast = function broadcast(message) {
   });
 };
 
-var userCount = 0;
+var userCount = 0; // Initial user count, will increase upon client connection and decrease when client disconnects
 
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
@@ -35,7 +35,8 @@ var userCount = 0;
 wss.on('connection', (ws) => {
   console.log('Client connected');
   userCount++;
-  console.log("The user count is now: "+userCount)
+
+  // Creates an object based on user count
 
   var obj = {
     id: uuidv1(),
@@ -43,17 +44,15 @@ wss.on('connection', (ws) => {
     type: "updateUsers"
   }
 
-    console.log(obj);
-
-    var string = JSON.stringify(obj);
-    wss.broadcast(string);
-    console.log(string);
+    var string = JSON.stringify(obj); // Stringifies above object
+    wss.broadcast(string); // Sends string to the server
 
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
   console.log('Client disconnected');
   userCount--;
-  console.log("The user count is now: "+userCount);
+
+  // Creates an object based on user count
 
   var obj = {
     id: uuidv1(),
@@ -61,11 +60,8 @@ wss.on('connection', (ws) => {
     type: "updateUsers"
   }
 
-    console.log(obj);
-
-    var string = JSON.stringify(obj);
-    wss.broadcast(string);
-    console.log(string);
+    var string = JSON.stringify(obj); // Stringifies the above object
+    wss.broadcast(string); // Sends string to the server
 });
 
   ws.on('message', function incoming(message) {
@@ -78,14 +74,16 @@ wss.on('connection', (ws) => {
 
      if (messageObj.type === "incomingMessage"){
 
+      // Creates an object based on the incoming message
+
       var obj = {
         id: uuidv1(),
         username: messageObj.username,
         content: messageObj.content,
         type: "postMessage"
       }
-      var string = JSON.stringify(obj);
-      wss.broadcast(string);
+      var string = JSON.stringify(obj); // Stringifies the above object
+      wss.broadcast(string); // Sends string to the server
     }
    });
 
@@ -97,14 +95,16 @@ wss.on('connection', (ws) => {
 
       if (notifObj.type === "incomingNotification"){
 
+      // Creates an object based on the incoming notification
+
       var obj = {
         id: uuidv1(),
         content: notifObj.content,
         type: "postNotification"
         }
 
-        var string = JSON.stringify(obj);
-        wss.broadcast(string);
+        var string = JSON.stringify(obj); // Stringifies the above object
+        wss.broadcast(string); // Sends string to the server
       }
     });
   });

@@ -7,7 +7,6 @@ class ChatBar extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.previousName = "";
     this._handleMessageKeyPress = this._handleMessageKeyPress.bind(this);
     this._handleUsernameKeyPress = this._handleUsernameKeyPress.bind(this);
@@ -34,7 +33,6 @@ class ChatBar extends Component {
       var message = "user "+this.previousName+" has changed their name to "+event.target.value+".";
       this.props.sendNotification(message);
       this.props.updateUsername(event.target.value);
-      console.log("its working");
     }
 
   }
