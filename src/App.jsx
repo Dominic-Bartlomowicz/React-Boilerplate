@@ -8,10 +8,11 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: []
+      currentUser: {name: ""}, // optional. if currentUser is not defined, it means the user is Anonymous
+      messages: [],
+      users: 0
     };
-    
+
     this.sendMessage=this.sendMessage.bind(this);
     this.sendUsername=this.sendUsername.bind(this);
     this.sendNotification=this.sendNotification.bind(this);
@@ -23,12 +24,29 @@ class App extends Component {
       this.socket = new WebSocket('ws://localhost:3001');
       this.socket.addEventListener('message', event => {
         console.log('message', event);
+
         const newMessage = JSON.parse(event.data);
         if(newMessage.type === "postMessage") {
           this.setState({
             messages: this.state.messages.concat(newMessage),
           });
         }
+
+        const newNotification = JSON.parse(event.data);
+        if(newNotification.type === "postNotification") {
+          this.setState({
+            messages: this.state.messages.concat(newNotification),
+          });
+        }
+
+        const numUsers = JSON.parse(event.data);
+        if(numUsers.type === "updateUsers") {
+          console.log("hello"+this.state.users)
+          this.setState({
+            users: numUsers.content
+          });
+        }
+
       });
     }
 
@@ -78,6 +96,7 @@ class App extends Component {
       <div>
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
+          <p>{this.state.users} users online</p>
         </nav>
         <ChatBar
           user={this.state.currentUser.name}
